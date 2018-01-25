@@ -12,8 +12,13 @@ class User(BaseModel):
     email = CharField()
     password = CharField()
 
+class Post(BaseModel):
+    title = CharField()
+    description = CharField()
+
 # create table
 User.create_table(True)
+Post.create_table(True)
 
 # connect db
 db.connect()
