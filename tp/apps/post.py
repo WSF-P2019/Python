@@ -8,4 +8,4 @@ app_post = Blueprint('app_post', __name__)
 def app():
   post = Post.create(title='lol', description='la bonne description')
   post.save()
-  return 'post'
+  return jsonify({'data': list(Post.select().dicts()) }), 201
