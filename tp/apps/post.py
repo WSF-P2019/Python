@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from helpers.post_helper import post_helper
-from models import User
+from models import Post
 
 app_post = Blueprint('app_post', __name__)
 
