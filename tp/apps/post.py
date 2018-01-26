@@ -62,3 +62,7 @@ def delete_post(id):
     return str(is_deleted)
   except Exception as error:
     return jsonify({'error': 'Not found {error}'.format(error=error) }), 404
+
+@app_post.route('/posts', methods=['GET'])
+def get_all_posts():
+  return jsonify({'data': list(Post.select().dicts()) }), 201
