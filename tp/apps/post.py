@@ -23,9 +23,12 @@ def create_post():
 # Create article
 @app_post.route('/post/<id>', methods=['GET'])
 def get_post(id):
-  post = Post.get(Post.id == id)
-  # We convert once again
-  data = model_to_dict(post)
+  try:
+    post = Post.get(Post.id == id)
+    # We convert once again
+    data = model_to_dict(post)
 
-  # We send the information to the browser
-  return jsonify({'data': data}), 201
+    # We send the information to the browser
+    return jsonify({'data': data}), 201
+  except Exception as error:
+    return jsonify({'error': 'Not found {error}'.format(error=error) }), 404
