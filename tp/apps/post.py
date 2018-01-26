@@ -32,3 +32,33 @@ def get_post(id):
     return jsonify({'data': data}), 201
   except Exception as error:
     return jsonify({'error': 'Not found {error}'.format(error=error) }), 404
+
+@app_post.route('/post/<id>', methods=['PUT'])
+def put_post(id):
+  try:
+    post = Post.get(Post.id == id)
+    params = request.get_json() # dict
+
+    if params.get('title', None) is not None :
+      post.title = params.get('title')
+    if params.get('description', None) is not None :
+      post.description = params.get('description')
+    post.save()
+
+    # We convert once again
+    data = model_to_dict(post)
+
+    # We send the information to the browser
+    return jsonify({'data': data}), 201
+  except Exception as error:
+    return jsonify({'error': 'Not found {error}'.format(error=error) }), 404
+
+@app_post.route('/post/<id>', methods=['DELETE'])
+def delete_post(id):
+  try:
+    post = Post.get(Post.id == id)
+    is_deleted = post.delete_instance()
+
+    return str(is_deleted)
+  except Exception as error:
+    return jsonify({'error': 'Not found {error}'.format(error=error) }), 404
