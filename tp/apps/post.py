@@ -10,10 +10,9 @@ def create_post():
   params = request.get_json() # dict
   title = params.get('title')
   description = params.get('description')
-  print title, description
 
-  # post = Post.create(title='lol', description='la bonne description')
-  # post.save()
+  post = Post.create(title=title, description=description)
+  post.save()
 
   # return jsonify({'data': list(Post.select().dicts()) }), 201
   return 'test'
