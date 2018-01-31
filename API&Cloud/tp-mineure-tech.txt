@@ -64,3 +64,10 @@ Générer une worldmap qui répertorie les users "jeanie"
   WHERE `users`.`first_name` = ?
   GROUP BY `countries__via__country_id`.`country_code`
   ORDER BY `countries__via__country_id`.`country_code` ASC
+
+Générer une barchart de l'évolution de nouveaux users s'appelant "jeanie"
+  SELECT count(*) AS `count`, date(`users`.`created_at`) AS `created_at`
+  FROM `users`
+  WHERE `users`.`first_name` = ?
+  GROUP BY date(`users`.`created_at`)
+  ORDER BY date(`users`.`created_at`) ASC
